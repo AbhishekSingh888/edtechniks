@@ -5,13 +5,21 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Base colors */
   --color-background: #ffffff;
   --color-foreground: #171717;
-  --color-primary: #3b82f6;
+  
+  /* Primary colors - can be overridden by adaptive theme */
+  --accent-color: rgb(37, 99, 235); /* Default blue */
+  --accent-color-light: rgba(37, 99, 235, 0.1);
+  --accent-color-medium: rgba(37, 99, 235, 0.5);
+  
+  /* Standard UI colors */
+  --color-primary: var(--accent-color);
   --color-primary-foreground: #ffffff;
   --color-secondary: #e5e7eb;
   --color-secondary-foreground: #1f2937;
-  --color-accent: #0ea5e9;
+  --color-accent: var(--accent-color);
   --color-accent-foreground: #ffffff;
   --color-muted: #f3f4f6;
   --color-muted-foreground: #6b7280;

@@ -1,11 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import Footer from "@/components/layout/footer"
-import Header from "@/components/layout/navbar"
-import { ScrollProgress } from "@/components/ui/scroll-progress"
+import { AdaptiveThemeProvider } from "@/components/adaptive-theme-provider"
+import EnhancedFooter from "@/components/layout/enhanced-footer"
+import EnhancedHeader from "@/components/layout/enhanced-navbar"
 import { ScrollToTop } from "@/components/ui/scroll-to-top"
+import CustomCursor from "@/components/ui/custom-cursor"
+import PageTransition from "@/components/ui/page-transition"
+import ThemeSwitcher from "@/components/ui/theme-switcher"
 
 export const metadata: Metadata = {
   title: "Edtechniks - Technology Solutions for Education & Business",
@@ -28,15 +30,18 @@ export default function RootLayout({
 
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 
-      </head>
-      <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <ScrollProgress />
-          <Header />
+      </head>      <body>
+        <AdaptiveThemeProvider defaultTheme="system" defaultAccentColor="blue">
+          <PageTransition />
+          <CustomCursor />
+          <EnhancedHeader />
+          <div className="fixed top-5 right-5 z-50">
+            <ThemeSwitcher includeColorThemes={true} />
+          </div>
           {children}
           <ScrollToTop />
-          <Footer />
-        </ThemeProvider>
+          <EnhancedFooter />
+        </AdaptiveThemeProvider>
       </body>
     </html>
   )

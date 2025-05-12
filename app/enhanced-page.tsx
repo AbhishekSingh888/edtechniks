@@ -9,15 +9,11 @@ import StickyShowcase from "../components/home/sticky-showcase"
 import EnhancedTestimonials from "../components/home/enhanced-testimonials"
 import AppleStatsSection from "../components/home/apple-stats-section"
 import AppleFeatureShowcase from "../components/home/apple-feature-showcase"
-import FeaturedCoursesSection from "../components/home/featured-courses-section"
-import AdvancedLearningFeaturesSection from "../components/home/advanced-learning-features"
-import FeatureComparisonSection from "../components/home/feature-comparison-section"
 
 // Import existing components
 import ContactSection from "../components/home/contact-section"
 import WhyChooseUsSection from "../components/home/why-choose-us"
 import CtaSection from "../components/home/cta-section"
-import ServicesSection from "../components/home/service-section"
 
 // Scroll progress indicator component
 function ScrollProgressIndicator() {
@@ -39,32 +35,24 @@ function ScrollProgressIndicator() {
 export default function Home() {
   // Handle smooth scrolling for anchor links
   useEffect(() => {
-    const handleLinkClick = (e: Event) => {
-      const target = e.target as HTMLElement;
-      
-      // Find closest anchor tag
-      const anchorElement = target.tagName === 'A' 
-        ? target as HTMLAnchorElement
-        : target.closest('a');
-      
-      if (!anchorElement) return;
-      
-      const href = anchorElement.getAttribute('href');
-      
-      if (href?.startsWith('#')) {
-        e.preventDefault();
-        const targetElement = document.querySelector(href) as HTMLElement;
-        
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
+    const handleLinkClick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement | null;
+        const href = target?.getAttribute?.('href');
+
+        if (href?.startsWith('#')) {
+            e.preventDefault();
+            const targetElement = document.querySelector(href) as HTMLElement | null;
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
         }
-      }
     };
     
     document.addEventListener('click', handleLinkClick);
+    
     return () => document.removeEventListener('click', handleLinkClick);
   }, [])
   
@@ -87,37 +75,19 @@ export default function Home() {
         <AppleFeatureShowcase />
       </section>
       
-      {/* Services section (existing) */}
-      <section id="services">
-        <ServicesSection />
-      </section>
-      
       {/* 3D sticky product showcase */}
       <section id="products">
         <StickyShowcase />
       </section>
       
-      {/* Why Choose Us section */}
+      {/* Why Choose Us section (existing) */}
       <section id="why-choose-us">
         <WhyChooseUsSection />
       </section>
-        {/* Apple-style stats section */}
+      
+      {/* Apple-style stats section */}
       <section id="stats">
         <AppleStatsSection />
-      </section>
-      
-      {/* Featured Courses section */}
-      <section id="courses">
-        <FeaturedCoursesSection />
-      </section>
-        {/* Advanced Learning Features section */}
-      <section id="advanced-features">
-        <AdvancedLearningFeaturesSection />
-      </section>
-      
-      {/* Feature Comparison section */}
-      <section id="comparison">
-        <FeatureComparisonSection />
       </section>
       
       {/* Enhanced testimonials */}
@@ -125,12 +95,12 @@ export default function Home() {
         <EnhancedTestimonials />
       </section>
       
-      {/* Call to action section */}
+      {/* Call to action section (existing) */}
       <section id="cta">
         <CtaSection />
       </section>
       
-      {/* Contact section */}
+      {/* Contact section (existing) */}
       <section id="contact">
         <ContactSection />
       </section>

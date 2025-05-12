@@ -10,38 +10,45 @@ export default function HeroSection() {
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      {/* Existing grid background */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+      {/* New animated gradient background overlay */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror" }}
+        className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mix-blend-multiply filter blur-3xl opacity-30"
+      ></motion.div>
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 py-16 md:grid-cols-2 md:gap-16 lg:py-24">
           {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col space-y-8"
           >
             <div className="space-y-4">
               <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl md:text-6xl"
               >
                 Transform your{" "}
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  digital experience
+                <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
+                  education technology
                 </span>
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="max-w-xl text-lg text-slate-600 dark:text-slate-300"
               >
-                Create stunning interfaces that captivate your audience and drive engagement with our innovative
-                platform.
+                Comprehensive EdTech solutions that enhance teaching, learning, and administration for modern educational institutions.
               </motion.p>
             </div>
 
@@ -52,7 +59,7 @@ export default function HeroSection() {
               className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
             >
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, x: 2 }}
                 whileTap={{ scale: 0.95 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -77,9 +84,10 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
+          {/* Image Content */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 20, scale: 0.98 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative mx-auto h-[400px] w-full max-w-md md:h-[500px]"
           >
@@ -87,14 +95,16 @@ export default function HeroSection() {
             <div className="absolute -left-4 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-blue-300 opacity-30 blur-3xl filter dark:bg-blue-800"></div>
 
             <div className="relative h-full w-full rounded-2xl bg-white p-2 shadow-2xl dark:bg-slate-800">
-              <Image
-                src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&w=500&h=500&fit=crop"
-                alt="Product illustration"
-                width={500}
-                height={500}
-                className="h-full w-full rounded-xl object-cover"
-                priority
-              />
+              <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+                <Image
+                  src="https://images.pexels.com/photos/5905555/pexels-photo-5905555.jpeg?auto=compress&w=500&h=500&fit=crop"
+                  alt="Modern classroom with education technology"
+                  width={500}
+                  height={500}
+                  className="h-full w-full rounded-xl object-cover"
+                  priority
+                />
+              </motion.div>
             </div>
           </motion.div>
         </div>
