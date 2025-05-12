@@ -1,0 +1,174 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X } from "lucide-react"
+
+const navItems = [
+  { name: "Home", href: "#" },
+  { name: "Services", href: "#services" },
+  { name: "Why Choose Us", href: "#why-choose-us" },
+  { name: "Contact", href: "#contact" },
+]
+
+export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  return (
+    <header
+      className={`fixed left-0 right-0 top-0 z-40 transition-all duration-300 ${isScrolled ? "bg-white/90 py-3 shadow-md backdrop-blur-md dark:bg-slate-900/90" : "bg-transparent py-5"
+        }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center"
+        >
+          <span className="text-xl font-bold text-blue-600">TechSolutions</span>
+        </motion.div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:block">
+          <ul className="flex space-x-8">
+            {navItems.map((item) => (
+              <motion.li key={item.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <a
+                  href={item.href}
+                  className="text-sm font-medium text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400"
+                  onClick={(e) => {
+                    if (item.href.startsWith("#")) {
+                      e.preventDefault()
+                      const element = document.querySelector(item.href)
+                      if (element) {
+                        window.scrollTo({
+                          top: element.getBoundingClientRect().top + window.scrollY - 100,
+                          behavior: "smooth",
+                        })
+                      }
+                    }
+                  }}
+                >
+                  {item.name}
+                </a>
+              </motion.li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="hidden md:block">
+          {/* <Button
+            size="sm"
+            className="bg-blue-600 hover:bg-blue-700"
+            onClick={() => {
+              const contactSection = document.querySelector("#contact")
+              if (contactSection) {
+                window.scrollTo({
+                  top: contactSection.getBoundingClientRect().top + window.scrollY - 100,
+                  behavior: "smooth",
+                })
+              }
+            }}
+          >
+            Get Started
+          </Button> */}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="rounded-md p-2 text-slate-700 md:hidden"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </motion.button>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden"
+          >
+            <div className="bg-white px-4 py-2 shadow-lg dark:bg-slate-800">
+              <nav>
+                <ul className="space-y-4 py-4">
+                  {navItems.map((item) => (
+                    <motion.li
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <a
+                        href={item.href}
+                        className="block py-2 text-base font-medium text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400"
+                        onClick={(e) => {
+                          if (item.href.startsWith("#")) {
+                            e.preventDefault()
+                            setIsMobileMenuOpen(false)
+                            const element = document.querySelector(item.href)
+                            if (element) {
+                              setTimeout(() => {
+                                window.scrollTo({
+                                  top: element.getBoundingClientRect().top + window.scrollY - 100,
+                                  behavior: "smooth",
+                                })
+                              }, 300)
+                            }
+                          }
+                        }}
+                      >
+                        {item.name}
+                      </a>
+                    </motion.li>
+                  ))}
+                  <li>
+                    {/* <Button
+                      className="mt-4 w-full bg-blue-600 hover:bg-blue-700"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false)
+                        setTimeout(() => {
+                          const contactSection = document.querySelector("#contact")
+                          if (contactSection) {
+                            window.scrollTo({
+                              top: contactSection.getBoundingClientRect().top + window.scrollY - 100,
+                              behavior: "smooth",
+                            })
+                          }
+                        }, 300)
+                      }}
+                    >
+                      Get Started
+                    </Button> */}
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  )
+}
