@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
+import { Button } from "../ui/button"
+
 
 const navItems = [
   { name: "Home", href: "#" },
@@ -28,10 +30,34 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const handleSmoothScroll = (href: string) => {
+    try {
+      if (href === "#") {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+        return
+      }
+
+      const element = document.querySelector(href)
+      if (element) {
+        const offsetTop = element.getBoundingClientRect().top + window.scrollY - 100
+        window.scrollTo({
+          top: offsetTop,
+          behavior: "smooth",
+        })
+      }
+    } catch (error) {
+      console.error("Error scrolling to section:", error)
+    }
+  }
+
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-40 transition-all duration-300 ${isScrolled ? "bg-white/90 py-3 shadow-md backdrop-blur-md dark:bg-slate-900/90" : "bg-transparent py-5"
-        }`}
+      className={`fixed left-0 right-0 top-0 z-40 transition-all duration-300 ${
+        isScrolled ? "bg-white/90 py-3 shadow-md backdrop-blur-md dark:bg-slate-900/90" : "bg-transparent py-5"
+      }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -52,16 +78,8 @@ export default function Header() {
                   href={item.href}
                   className="text-sm font-medium text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400"
                   onClick={(e) => {
-                    if (item.href.startsWith("#")) {
-                      e.preventDefault()
-                      const element = document.querySelector(item.href)
-                      if (element) {
-                        window.scrollTo({
-                          top: element.getBoundingClientRect().top + window.scrollY - 100,
-                          behavior: "smooth",
-                        })
-                      }
-                    }
+                    e.preventDefault()
+                    handleSmoothScroll(item.href)
                   }}
                 >
                   {item.name}
@@ -72,21 +90,26 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:block">
-          {/* <Button
+          <Button
             size="sm"
             className="bg-blue-600 hover:bg-blue-700"
             onClick={() => {
-              const contactSection = document.querySelector("#contact")
-              if (contactSection) {
-                window.scrollTo({
-                  top: contactSection.getBoundingClientRect().top + window.scrollY - 100,
-                  behavior: "smooth",
-                })
+              try {
+                const contactSection = document.querySelector("#contact")
+                if (contactSection) {
+                  const offsetTop = contactSection.getBoundingClientRect().top + window.scrollY - 100
+                  window.scrollTo({
+                    top: offsetTop,
+                    behavior: "smooth",
+                  })
+                }
+              } catch (error) {
+                console.error("Error scrolling to contact section:", error)
               }
             }}
           >
             Get Started
-          </Button> */}
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -125,19 +148,11 @@ export default function Header() {
                         href={item.href}
                         className="block py-2 text-base font-medium text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400"
                         onClick={(e) => {
-                          if (item.href.startsWith("#")) {
-                            e.preventDefault()
-                            setIsMobileMenuOpen(false)
-                            const element = document.querySelector(item.href)
-                            if (element) {
-                              setTimeout(() => {
-                                window.scrollTo({
-                                  top: element.getBoundingClientRect().top + window.scrollY - 100,
-                                  behavior: "smooth",
-                                })
-                              }, 300)
-                            }
-                          }
+                          e.preventDefault()
+                          setIsMobileMenuOpen(false)
+                          setTimeout(() => {
+                            handleSmoothScroll(item.href)
+                          }, 300)
                         }}
                       >
                         {item.name}
@@ -145,23 +160,28 @@ export default function Header() {
                     </motion.li>
                   ))}
                   <li>
-                    {/* <Button
+                    <Button
                       className="mt-4 w-full bg-blue-600 hover:bg-blue-700"
                       onClick={() => {
-                        setIsMobileMenuOpen(false)
-                        setTimeout(() => {
-                          const contactSection = document.querySelector("#contact")
-                          if (contactSection) {
-                            window.scrollTo({
-                              top: contactSection.getBoundingClientRect().top + window.scrollY - 100,
-                              behavior: "smooth",
-                            })
-                          }
-                        }, 300)
+                        try {
+                          setIsMobileMenuOpen(false)
+                          setTimeout(() => {
+                            const contactSection = document.querySelector("#contact")
+                            if (contactSection) {
+                              const offsetTop = contactSection.getBoundingClientRect().top + window.scrollY - 100
+                              window.scrollTo({
+                                top: offsetTop,
+                                behavior: "smooth",
+                              })
+                            }
+                          }, 300)
+                        } catch (error) {
+                          console.error("Error scrolling to contact section:", error)
+                        }
                       }}
                     >
                       Get Started
-                    </Button> */}
+                    </Button>
                   </li>
                 </ul>
               </nav>

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 // import { Button } from "@/components/ui/button"
 import { PhoneCall, Mail } from "lucide-react"
+import { Button } from "../ui/button"
 
 export default function CtaSection() {
   return (
@@ -24,23 +25,23 @@ export default function CtaSection() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              {/* <Button size="lg" variant="secondary" className="w-full sm:w-auto relative overflow-hidden group">
+              <Button size="lg" variant="secondary" className="w-full sm:w-auto relative overflow-hidden group">
                 <span className="absolute inset-0 w-0 bg-blue-600/20 transition-all duration-300 ease-out group-hover:w-full"></span>
                 <span className="relative flex items-center">
                   <PhoneCall className="mr-2 h-4 w-4" />
                   <span>Schedule a Call</span>
                 </span>
-              </Button> */}
+              </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              {/* <Button
+              <Button
                 size="lg"
                 variant="outline"
                 className="w-full border-white text-white hover:bg-white/10 sm:w-auto group"
               >
                 <Mail className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                 Request Information
-              </Button> */}
+              </Button>
             </motion.div>
           </div>
         </motion.div>

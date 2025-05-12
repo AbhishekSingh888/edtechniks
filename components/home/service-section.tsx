@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { BookOpen, Code, Cpu, Building } from "lucide-react"
+import { Card } from "../ui/card"
 // import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 const services = [
@@ -92,8 +93,8 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
             >
-              {/* <Card className="h-full overflow-hidden border-0 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-slate-800">
-                <CardHeader className="pb-2">
+              <Card className="h-full overflow-hidden border-0 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-slate-800">
+                {/* <CardHeader className="pb-2">
                   <motion.div
                     className="mb-4"
                     whileHover={{ rotate: [0, -10, 10, -10, 0], transition: { duration: 0.5 } }}
@@ -104,27 +105,27 @@ export default function ServicesSection() {
                   <CardDescription className="text-base text-slate-600 dark:text-slate-300">
                     {service.description}
                   </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                    {service.features.map((feature) => (
-                      <motion.li
-                        key={feature}
-                        className="flex items-center"
-                        whileHover={{ x: 5 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                      >
-                        <div className="mr-2 h-1.5 w-1.5 rounded-full bg-blue-600"></div>
-                        <span className="text-sm text-slate-700 dark:text-slate-300">{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card> */}
+                </CardHeader> */}
+                {/* <CardContent> */}
+                {/* <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {service.features.map((feature) => (
+                    <motion.li
+                      key={feature}
+                      className="flex items-center"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      <div className="mr-2 h-1.5 w-1.5 rounded-full bg-blue-600"></div>
+                      <span className="text-sm text-slate-700 dark:text-slate-300">{feature}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </CardContent> */}
+              </Card>
             </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </section >
   )
 }
