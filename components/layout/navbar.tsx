@@ -66,7 +66,7 @@ export default function Header() {
           transition={{ duration: 0.5 }}
           className="flex items-center"
         >
-          <span className="text-xl font-bold text-blue-600">TechSolutions</span>
+          <span className="text-xl font-bold text-blue-600">Edtechniks</span>
         </motion.div>
 
         {/* Desktop Navigation */}

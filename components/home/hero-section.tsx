@@ -88,7 +88,7 @@ export default function HeroSection() {
 
             <div className="relative h-full w-full rounded-2xl bg-white p-2 shadow-2xl dark:bg-slate-800">
               <Image
-                src="/placeholder.svg?height=500&width=500"
+                src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&w=500&h=500&fit=crop"
                 alt="Product illustration"
                 width={500}
                 height={500}
