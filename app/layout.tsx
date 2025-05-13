@@ -2,11 +2,11 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import { AdaptiveThemeProvider } from "@/components/adaptive-theme-provider"
-import EnhancedFooter from "@/components/layout/footer"
-import EnhancedHeader from "@/components/layout/navbar"
 import { ScrollToTop } from "@/components/ui/scroll-to-top"
 import PageTransition from "@/components/ui/page-transition"
 import ThemeSwitcher from "@/components/ui/theme-switcher"
+import Footer from "@/components/layout/footer"
+import Header from "@/components/layout/navbar"
 
 export const metadata: Metadata = {
   title: "Edtechniks - Technology Solutions for Education & Business",
@@ -32,13 +32,13 @@ export default function RootLayout({
       </head>      <body>
         <AdaptiveThemeProvider defaultTheme="system" defaultAccentColor="blue">
           <PageTransition />
-          <EnhancedHeader />
-          <div className="fixed top-5 right-5 z-50">
-            <ThemeSwitcher orientation="vertical" includeColorThemes/>
+          <Header />
+          <div className="fixed bottom-25 right-5 z-50">
+            <ThemeSwitcher orientation="vertical" size="sm" />
           </div>
           {children}
           <ScrollToTop />
-          <EnhancedFooter />
+          <Footer />
         </AdaptiveThemeProvider>
       </body>
     </html>

@@ -13,7 +13,7 @@ const navItems = [
   { name: "Contact", href: "#contact" },
 ]
 
-export default function EnhancedHeader() {
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("home")

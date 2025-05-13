@@ -26,7 +26,7 @@ const services = [
   { name: "Annual Maintenance", href: "#services" },
 ]
 
-export default function EnhancedFooter() {
+export default function Footer() {
   const [emailHovered, setEmailHovered] = useState(false)
   const footerRef = useRef(null)
   const isInView = useInView(footerRef, { once: true, amount: 0.3 })
@@ -83,7 +83,7 @@ export default function EnhancedFooter() {
         />
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10" />
       </div>
-      
+
       {/* Main footer content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
@@ -105,7 +105,7 @@ export default function EnhancedFooter() {
                 Empowering education through innovative technology solutions, enhancing the teaching and learning experience.
               </p>
             </div>
-            
+
             <div className="space-y-4">
               <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Follow Us</h4>
               <div className="flex space-x-3">
@@ -129,7 +129,7 @@ export default function EnhancedFooter() {
               </div>
             </div>
           </motion.div>
-          
+
           {/* Column 2: Quick Links */}
           <motion.div variants={itemVariants} className="space-y-6">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Quick Links</h3>
@@ -151,7 +151,7 @@ export default function EnhancedFooter() {
               ))}
             </ul>
           </motion.div>
-          
+
           {/* Column 3: Services */}
           <motion.div variants={itemVariants} className="space-y-6">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Our Services</h3>
@@ -173,7 +173,7 @@ export default function EnhancedFooter() {
               ))}
             </ul>
           </motion.div>
-          
+
           {/* Column 4: Contact Us */}
           <motion.div variants={itemVariants} className="space-y-6">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400">Contact Us</h3>
@@ -191,7 +191,7 @@ export default function EnhancedFooter() {
                 <span>contact@edtechniks.com</span>
               </li>
             </ul>
-            
+
             {/* Newsletter Subscription */}
             <div className="mt-4 space-y-4">
               <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
@@ -203,9 +203,9 @@ export default function EnhancedFooter() {
                   placeholder="Your email"
                   className="rounded-md border-none bg-slate-800 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-500"
                 />
-                <MagneticButton 
-                  variant="primary" 
-                  size="sm" 
+                <MagneticButton
+                  variant="primary"
+                  size="sm"
                   className="sm:w-auto"
                   magneticIntensity={0.3}
                 >
@@ -215,39 +215,39 @@ export default function EnhancedFooter() {
             </div>
           </motion.div>
         </motion.div>
-        
+
         {/* Bottom Section with divider and copyright */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="mt-16 border-t border-slate-800 pt-8 text-center"
         >
           <p className="text-sm text-slate-400">
-            &copy; {new Date().getFullYear()} Edtechniks. All rights reserved. 
+            &copy; {new Date().getFullYear()} Edtechniks. All rights reserved.
             <span className="block sm:inline sm:ml-2">
               Designed with innovation for modern education.
             </span>
           </p>
-          
+
           {/* Apple-inspired floating links */}
           <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-slate-400">
-            <motion.a 
-              href="#" 
+            <motion.a
+              href="#"
               className="hover:text-white transition-colors"
               whileHover={{ y: -2 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               Privacy Policy
             </motion.a>
-            <motion.a 
-              href="#" 
+            <motion.a
+              href="#"
               className="hover:text-white transition-colors"
               whileHover={{ y: -2 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               Terms of Service
             </motion.a>
-            <motion.a 
-              href="#" 
+            <motion.a
+              href="#"
               className="hover:text-white transition-colors"
               whileHover={{ y: -2 }}
               transition={{ type: "spring", stiffness: 300 }}

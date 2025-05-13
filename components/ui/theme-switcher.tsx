@@ -7,13 +7,9 @@ import { Sun, Moon, Monitor, Palette } from "lucide-react"
 
 interface ThemeSwitcherProps {
   className?: string
-
   showLabels?: boolean
-
   orientation?: "horizontal" | "vertical"
-
   size?: "sm" | "md" | "lg"
-
   includeColorThemes?: boolean
 }
 
