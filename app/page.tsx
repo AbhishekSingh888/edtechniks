@@ -3,58 +3,34 @@
 import { useEffect } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
 
-// Import our new components
 import ParallaxHero from "../components/home/parallax-hero"
-import StickyShowcase from "../components/home/sticky-showcase"
-import EnhancedTestimonials from "../components/home/enhanced-testimonials"
-import AppleStatsSection from "../components/home/apple-stats-section"
-import AppleFeatureShowcase from "../components/home/apple-feature-showcase"
+import EnhancedTestimonials from "../components/home/testimonial"
 import FeaturedCoursesSection from "../components/home/featured-courses-section"
-import AdvancedLearningFeaturesSection from "../components/home/advanced-learning-features"
-import FeatureComparisonSection from "../components/home/feature-comparison-section"
-
-// Import existing components
 import ContactSection from "../components/home/contact-section"
 import WhyChooseUsSection from "../components/home/why-choose-us"
 import CtaSection from "../components/home/cta-section"
 import ServicesSection from "../components/home/service-section"
-
-// Scroll progress indicator component
-function ScrollProgressIndicator() {
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  })
-
-  return (
-    <motion.div
-      className="fixed bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 z-50 origin-left"
-      style={{ scaleX }}
-    />
-  )
-}
+import { ScrollProgress } from "@/components/ui/scroll-progress"
+import FeatureShowcase from "../components/home/feature-showcase"
+import StatsSection from "../components/home/stats-section"
 
 export default function Home() {
-  // Handle smooth scrolling for anchor links
   useEffect(() => {
     const handleLinkClick = (e: Event) => {
       const target = e.target as HTMLElement;
-      
-      // Find closest anchor tag
-      const anchorElement = target.tagName === 'A' 
+
+      const anchorElement = target.tagName === 'A'
         ? target as HTMLAnchorElement
         : target.closest('a');
-      
+
       if (!anchorElement) return;
-      
+
       const href = anchorElement.getAttribute('href');
-      
+
       if (href?.startsWith('#')) {
         e.preventDefault();
         const targetElement = document.querySelector(href) as HTMLElement;
-        
+
         if (targetElement) {
           window.scrollTo({
             top: targetElement.offsetTop - 80,
@@ -63,74 +39,51 @@ export default function Home() {
         }
       }
     };
-    
+
     document.addEventListener('click', handleLinkClick);
     return () => document.removeEventListener('click', handleLinkClick);
   }, [])
-  
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Enhanced scroll progress indicator */}
-      <ScrollProgressIndicator />
-      
-      {/* Our new parallax hero section */}
+      <ScrollProgress />
+
       <section id="home">
         <ParallaxHero />
       </section>
-      
-      {/* Apple-style feature showcase */}
+
       <section id="features">
-        <AppleFeatureShowcase />
+        <FeatureShowcase />
       </section>
-      
-      {/* Services section (existing) */}
+
       <section id="services">
         <ServicesSection />
       </section>
-      
-      {/* 3D sticky product showcase */}
-      <section id="products">
-        <StickyShowcase />
-      </section>
-      
-      {/* Why Choose Us section */}
+
       <section id="why-choose-us">
         <WhyChooseUsSection />
       </section>
-        {/* Apple-style stats section */}
       <section id="stats">
-        <AppleStatsSection />
+        <StatsSection />
       </section>
-      
-      {/* Featured Courses section */}
+
       <section id="courses">
         <FeaturedCoursesSection />
       </section>
-        {/* Advanced Learning Features section */}
-      <section id="advanced-features">
-        <AdvancedLearningFeaturesSection />
-      </section>
-      
-      {/* Feature Comparison section */}
-      <section id="comparison">
-        <FeatureComparisonSection />
-      </section>
-      
-      {/* Enhanced testimonials */}
+
       <section id="testimonials">
         <EnhancedTestimonials />
       </section>
-      
-      {/* Call to action section */}
+
+     
       <section id="cta">
         <CtaSection />
       </section>
-      
-      {/* Contact section */}
+
       <section id="contact">
         <ContactSection />
       </section>

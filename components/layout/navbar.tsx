@@ -5,17 +5,18 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { Button } from "../ui/button"
 
-
+// Updated navigation items with our new sections
 const navItems = [
-  { name: "Home", href: "#" },
-  { name: "Services", href: "#services" },
-  { name: "Why Choose Us", href: "#why-choose-us" },
+  { name: "Home", href: "#home" },
+  { name: "Features", href: "#features" },
+  { name: "Courses", href: "#courses" },
   { name: "Contact", href: "#contact" },
 ]
 
-export default function Header() {
+export default function EnhancedHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("home")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +24,20 @@ export default function Header() {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
+      }
+      
+      // Update active section based on scroll position
+      const sections = navItems.map(item => item.href.substring(1))
+      
+      for (const section of sections.reverse()) {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= 100) {
+            setActiveSection(section)
+            break
+          }
+        }
       }
     }
 
@@ -32,7 +47,7 @@ export default function Header() {
 
   const handleSmoothScroll = (href: string) => {
     try {
-      if (href === "#") {
+      if (href === "#home") {
         window.scrollTo({
           top: 0,
           behavior: "smooth",
@@ -42,7 +57,7 @@ export default function Header() {
 
       const element = document.querySelector(href)
       if (element) {
-        const offsetTop = element.getBoundingClientRect().top + window.scrollY - 100
+        const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80
         window.scrollTo({
           top: offsetTop,
           behavior: "smooth",
@@ -69,20 +84,30 @@ export default function Header() {
           <span className="text-xl font-bold text-blue-600">Edtechniks</span>
         </motion.div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - Redesigned with active indicators */}
         <nav className="hidden md:block">
-          <ul className="flex space-x-8">
+          <ul className="flex space-x-6">
             {navItems.map((item) => (
-              <motion.li key={item.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.li key={item.name} className="relative">
                 <a
                   href={item.href}
-                  className="text-sm font-medium text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400"
+                  className={`text-sm font-medium transition-colors relative py-2 px-1 ${
+                    activeSection === item.href.substring(1) 
+                      ? "text-blue-600 dark:text-blue-400" 
+                      : "text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400"
+                  }`}
                   onClick={(e) => {
                     e.preventDefault()
                     handleSmoothScroll(item.href)
                   }}
                 >
                   {item.name}
+                  {activeSection === item.href.substring(1) && (
+                    <motion.span 
+                      layoutId="activeIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400"
+                    />
+                  )}
                 </a>
               </motion.li>
             ))}
@@ -97,7 +122,7 @@ export default function Header() {
               try {
                 const contactSection = document.querySelector("#contact")
                 if (contactSection) {
-                  const offsetTop = contactSection.getBoundingClientRect().top + window.scrollY - 100
+                  const offsetTop = contactSection.getBoundingClientRect().top + window.scrollY - 80
                   window.scrollTo({
                     top: offsetTop,
                     behavior: "smooth",
@@ -116,7 +141,7 @@ export default function Header() {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="rounded-md p-2 text-slate-700 md:hidden"
+          className="rounded-md p-2 text-slate-700 dark:text-slate-200 md:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -133,9 +158,9 @@ export default function Header() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden"
           >
-            <div className="bg-white px-4 py-2 shadow-lg dark:bg-slate-800">
+            <div className="bg-white/95 backdrop-blur-md px-4 py-2 shadow-lg dark:bg-slate-800/95">
               <nav>
-                <ul className="space-y-4 py-4">
+                <ul className="space-y-2 py-4">
                   {navItems.map((item) => (
                     <motion.li
                       key={item.name}
@@ -146,7 +171,11 @@ export default function Header() {
                     >
                       <a
                         href={item.href}
-                        className="block py-2 text-base font-medium text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400"
+                        className={`block py-2 text-base font-medium ${
+                          activeSection === item.href.substring(1) 
+                            ? "text-blue-600 dark:text-blue-400" 
+                            : "text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400"
+                        }`}
                         onClick={(e) => {
                           e.preventDefault()
                           setIsMobileMenuOpen(false)
@@ -168,7 +197,7 @@ export default function Header() {
                           setTimeout(() => {
                             const contactSection = document.querySelector("#contact")
                             if (contactSection) {
-                              const offsetTop = contactSection.getBoundingClientRect().top + window.scrollY - 100
+                              const offsetTop = contactSection.getBoundingClientRect().top + window.scrollY - 80
                               window.scrollTo({
                                 top: offsetTop,
                                 behavior: "smooth",

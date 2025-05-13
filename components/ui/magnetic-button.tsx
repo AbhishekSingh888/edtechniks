@@ -27,25 +27,25 @@ export default function MagneticButton({
   hoverScale = 1.05,
   tapScale = 0.97,
   variant = "primary",
-  size = "md"
+  size = "lg"
 }: MagneticButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const [isMounted, setIsMounted] = useState(false)
-  
+
   // Initialize motion values
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
-  
+
   // Create springs for smoother animation
   const springX = useSpring(mouseX, springConfig)
   const springY = useSpring(mouseY, springConfig)
-  
+
   // Create CSS transform template
   const transform = useMotionTemplate`translateX(${springX}px) translateY(${springY}px)`
-  
+
   // Calculate base classes based on variant and size
   const getVariantClasses = () => {
-    switch(variant) {
+    switch (variant) {
       case "primary":
         return "bg-blue-600 hover:bg-blue-700 text-white";
       case "secondary":
@@ -58,9 +58,9 @@ export default function MagneticButton({
         return "bg-blue-600 hover:bg-blue-700 text-white";
     }
   }
-  
+
   const getSizeClasses = () => {
-    switch(size) {
+    switch (size) {
       case "sm":
         return "text-sm py-1.5 px-3";
       case "md":
@@ -74,35 +74,35 @@ export default function MagneticButton({
 
   useEffect(() => {
     setIsMounted(true)
-    
+
     return () => setIsMounted(false)
   }, [])
-  
+
   // Function to handle mouse movement
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!buttonRef.current || !isMounted) return
-    
+
     const rect = buttonRef.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
-    
+
     const distanceX = e.clientX - centerX
     const distanceY = e.clientY - centerY
-    
+
     // Update motion values
     mouseX.set(distanceX * magneticIntensity)
     mouseY.set(distanceY * magneticIntensity)
   }
-  
+
   // Reset position when mouse leaves
   const handleMouseLeave = () => {
     mouseX.set(0)
     mouseY.set(0)
   }
-  
+
   // Get all classes
-  const allClasses = `relative rounded-lg font-medium transition-colors ${getSizeClasses()} ${getVariantClasses()} ${className}`
-  
+  const allClasses = `relative flex items-center justify-center rounded-lg font-medium transition-colors ${getSizeClasses()} ${getVariantClasses()} ${className}`
+
   return (
     <motion.button
       ref={buttonRef}
@@ -115,21 +115,20 @@ export default function MagneticButton({
       whileTap={{ scale: tapScale }}
     >
       {children}
-      
-      {/* Add animated gradient on hover for gradient variant */}
+
+
       {variant === "gradient" && (
-        <motion.div 
-          className="absolute inset-0 -z-10 rounded-lg opacity-0 bg-gradient-to-r from-blue-400 to-purple-400 blur-xl"
+        <motion.div
+          className="absolute flex inset-0 -z-10 rounded-lg opacity-0 bg-gradient-to-r from-blue-400 to-purple-400 blur-xl"
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 0.4 }}
           transition={{ duration: 0.3 }}
         />
       )}
-      
-      {/* Add soft glow on hover for primary variant */}
+
       {variant === "primary" && (
-        <motion.div 
-          className="absolute inset-0 -z-10 rounded-lg opacity-0 bg-blue-500 blur-xl" 
+        <motion.div
+          className="absolute flex inset-0 -z-10 rounded-lg opacity-0 bg-blue-500 blur-xl"
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 0.4 }}
           transition={{ duration: 0.3 }}

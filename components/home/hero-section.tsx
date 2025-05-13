@@ -9,25 +9,18 @@ export default function HeroSection() {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      {/* Existing grid background */}
+    <div className="relative overflow-hidden bg-white dark:bg-slate-900">
+      {/* Simple grid background */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-      {/* New animated gradient background overlay */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "mirror" }}
-        className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mix-blend-multiply filter blur-3xl opacity-30"
-      ></motion.div>
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 py-16 md:grid-cols-2 md:gap-16 lg:py-24">
+        <div className="grid grid-cols-1 items-center gap-8 py-12 md:grid-cols-2 md:gap-12 lg:py-20">
           {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col space-y-8"
+            className="flex flex-col space-y-6"
           >
             <div className="space-y-4">
               <motion.h1
@@ -37,7 +30,7 @@ export default function HeroSection() {
                 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl md:text-6xl"
               >
                 Transform your{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
+                <span className="text-blue-600 dark:text-blue-400">
                   education technology
                 </span>
               </motion.h1>
@@ -63,9 +56,9 @@ export default function HeroSection() {
                 whileTap={{ scale: 0.95 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-purple-600 to-blue-500 p-0.5 text-sm font-medium text-white hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
+                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
               >
-                <span className="relative flex items-center rounded-md bg-gradient-to-br from-purple-600 to-blue-500 px-5 py-3 transition-all duration-75 ease-in group-hover:bg-opacity-0">
+                <span className="flex items-center">
                   Get Started
                   <motion.span animate={{ x: isHovered ? 5 : 0 }} transition={{ duration: 0.2 }} className="ml-2">
                     <ArrowRight className="h-5 w-5" />
@@ -76,7 +69,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-900 hover:bg-slate-100 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-700"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700 dark:focus:ring-slate-700"
               >
                 Learn More
                 <ChevronRight className="ml-2 h-4 w-4" />
@@ -86,22 +79,19 @@ export default function HeroSection() {
 
           {/* Image Content */}
           <motion.div
-            initial={{ opacity: 0, x: 20, scale: 0.98 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative mx-auto h-[400px] w-full max-w-md md:h-[500px]"
+            className="relative mx-auto h-[400px] w-full max-w-lg md:h-[460px]"
           >
-            <div className="absolute -right-4 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-purple-300 opacity-30 blur-3xl filter dark:bg-purple-800"></div>
-            <div className="absolute -left-4 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-blue-300 opacity-30 blur-3xl filter dark:bg-blue-800"></div>
-
-            <div className="relative h-full w-full rounded-2xl bg-white p-2 shadow-2xl dark:bg-slate-800">
+            <div className="relative h-full w-full rounded-lg bg-white shadow-lg dark:bg-slate-800">
               <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
                 <Image
                   src="https://images.pexels.com/photos/5905555/pexels-photo-5905555.jpeg?auto=compress&w=500&h=500&fit=crop"
                   alt="Modern classroom with education technology"
                   width={500}
                   height={500}
-                  className="h-full w-full rounded-xl object-cover"
+                  className="h-full w-full rounded-lg object-cover"
                   priority
                 />
               </motion.div>

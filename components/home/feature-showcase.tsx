@@ -120,7 +120,7 @@ const colorMap = {
     }
 }
 
-export default function AppleFeatureShowcase() {
+export default function FeatureShowcase() {
     const containerRef = useRef(null)
     const isInView = useInView(containerRef, { once: true, amount: 0.2 })
     const [activeFeature, setActiveFeature] = useState<number | null>(null)
@@ -153,8 +153,8 @@ export default function AppleFeatureShowcase() {
                     </motion.div>
                 </div>
 
-                {/* Feature grid with Apple-style interactions */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 lg:gap-8">
                     {features.map((feature, index) => {
                         const colors = colorMap[feature.color] as typeof colorMap[keyof typeof colorMap]
                         return (

@@ -55,7 +55,7 @@ const stats = [
   }
 ]
 
-export default function AppleStatsSection() {
+export default function StatsSection() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
   

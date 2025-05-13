@@ -6,19 +6,14 @@ import { useTheme } from "../adaptive-theme-provider"
 import { Sun, Moon, Monitor, Palette } from "lucide-react"
 
 interface ThemeSwitcherProps {
-  /** Additional CSS classes */
   className?: string
-  
-  /** Whether to show text labels */
+
   showLabels?: boolean
-  
-  /** Orientation of the switcher */
+
   orientation?: "horizontal" | "vertical"
-  
-  /** Size of the icons */
+
   size?: "sm" | "md" | "lg"
-  
-  /** Whether to include color theme options */
+
   includeColorThemes?: boolean
 }
 
@@ -29,33 +24,26 @@ export default function ThemeSwitcher({
   size = "md",
   includeColorThemes = false,
 }: ThemeSwitcherProps) {
-  // Use theme context
   const { theme, setTheme, accentColor, setAccentColor } = useTheme()
-  
-  // Color palette open/closed state
+
   const [isPaletteOpen, setIsPaletteOpen] = useState(false)
-  
-  // Define icon sizes based on the size prop
+
   const iconSizes = {
     sm: 18,
     md: 20,
     lg: 24,
   }
-  
-  // Base class for buttons
+
   const buttonBaseClass = `
     relative flex items-center justify-center rounded-lg 
     ${size === "sm" ? "p-1.5" : size === "md" ? "p-2" : "p-2.5"}
     transition-all duration-300 ease-out
   `
-  
-  // Active button class
+
   const activeClass = "bg-slate-200 text-slate-900 dark:bg-slate-700 dark:text-white"
-  
-  // Inactive button class
+
   const inactiveClass = "text-slate-600 hover:text-slate-900 hover:bg-slate-200/80 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700/80"
-  
-  // Available accent colors
+
   const accentColors = [
     { name: "blue", color: "rgb(37, 99, 235)" },
     { name: "purple", color: "rgb(147, 51, 234)" },
@@ -66,14 +54,13 @@ export default function ThemeSwitcher({
 
   return (
     <div className={`${className}`}>
-      <div 
+      <div
         className={`
           flex ${orientation === "horizontal" ? "flex-row" : "flex-col"} 
           gap-2 rounded-lg bg-white/80 p-1 shadow-sm backdrop-blur-sm
           dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700
         `}
       >
-        {/* Theme mode buttons */}
         <button
           type="button"
           onClick={() => setTheme("light")}
@@ -83,7 +70,7 @@ export default function ThemeSwitcher({
           <Sun size={iconSizes[size]} />
           {showLabels && <span className="ml-2">Light</span>}
         </button>
-        
+
         <button
           type="button"
           onClick={() => setTheme("dark")}
@@ -93,7 +80,7 @@ export default function ThemeSwitcher({
           <Moon size={iconSizes[size]} />
           {showLabels && <span className="ml-2">Dark</span>}
         </button>
-        
+
         <button
           type="button"
           onClick={() => setTheme("system")}
@@ -103,8 +90,7 @@ export default function ThemeSwitcher({
           <Monitor size={iconSizes[size]} />
           {showLabels && <span className="ml-2">System</span>}
         </button>
-        
-        {/* Color theme selector */}
+
         {includeColorThemes && (
           <div className="relative">
             <button
@@ -119,8 +105,7 @@ export default function ThemeSwitcher({
               <Palette size={iconSizes[size]} />
               {showLabels && <span className="ml-2">Colors</span>}
             </button>
-            
-            {/* Color palette dropdown */}
+
             <AnimatePresence>
               {isPaletteOpen && (
                 <motion.div
@@ -162,5 +147,4 @@ export default function ThemeSwitcher({
   )
 }
 
-// We need to import AnimatePresence here because we're using it inside the component
 import { AnimatePresence } from "framer-motion"
